@@ -1,7 +1,7 @@
 import { Link, createFileRoute, notFound } from "@tanstack/react-router";
 import { useEffect, useMemo, useState } from "react";
 import { MessageCircle, ShoppingBag, Zap } from "lucide-react";
-import { getFabric, inr } from "@/data/fabrics";
+import { FABRICS, getFabric, inr } from "@/data/fabrics";
 import { useCart } from "@/lib/cart";
 import { QuantityStepper } from "@/components/QuantityStepper";
 import { FabricCard } from "@/components/FabricCard";
@@ -38,15 +38,6 @@ function FabricPage() {
     const t = setTimeout(() => setFlash(false), 520);
     return () => clearTimeout(t);
   }, [total]);
-
-  const related = useMemo(
-    () =>
-      // avoid importing FABRICS directly here keeps loader data authoritative
-      fabric.categories
-        .flatMap(() => [] as typeof import.meta [])
-        .concat(),
-    [fabric],
-  );
 
   return (
     <div className="mx-auto max-w-7xl px-6 pt-8 pb-24 md:pb-10">
@@ -187,7 +178,6 @@ function FabricPage() {
   );
 }
 
-import { FABRICS } from "@/data/fabrics";
 function RelatedRail({ currentId, categories }: { currentId: string; categories: string[] }) {
   const related = FABRICS.filter(
     (f) => f.id !== currentId && f.categories.some((c) => categories.includes(c)),
