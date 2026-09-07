@@ -46,7 +46,7 @@ function FabricPage() {
         <span className="mx-1.5">/</span>
         <Link
           to="/shop/$category"
-          params={{ category: fabric.categories[0] }}
+          params={{ category: fabric.categories[0] ?? "suiting" }}
           className="capitalize hover:underline"
         >
           {fabric.categories[0]}
